@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const BASE_URL = 'http://3.111.196.92:8020/api/v1'
-const API_TOKEN = localStorage.getItem('token')
+//const API_TOKEN = localStorage.getItem('token')
 
 const api = axios.create({
   baseURL: BASE_URL,
