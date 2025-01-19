@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchFeedback } from '../services/api'
-import type { CommunityFeedback } from '../types/index'
+import type { CommunityFeedback } from '../types'
 
 export default function CommunityFeedback() {
   const [feedback, setFeedback] = useState<CommunityFeedback | null>(null)
@@ -20,7 +20,11 @@ export default function CommunityFeedback() {
     loadFeedback()
   }, [])
 
-  if (loading) return <div>Loading feedback...</div>
+  if (loading) return (
+    <div className="h-full flex items-center justify-center">
+      <div className="text-gray-500">Loading feedback...</div>
+    </div>
+  )
 
   if (!feedback) return null
 
@@ -30,11 +34,11 @@ export default function CommunityFeedback() {
   const negativeWidth = (feedback.negative / total) * 100
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Community feedback</h3>
-      <h4 className="text-xl font-semibold mb-4">Mostly positive</h4>
+    <div className="h-full flex flex-col">
+      <h3 className="text-base font-medium text-gray-900 mb-4">Community feedback</h3>
+      <h4 className="text-lg font-semibold mb-4">Mostly positive</h4>
       
-      <div className="h-2 flex rounded-full overflow-hidden">
+      <div className="h-2 flex rounded-full overflow-hidden mb-4">
         <div 
           className="bg-red-400"
           style={{ width: `${negativeWidth}%` }}
@@ -49,20 +53,21 @@ export default function CommunityFeedback() {
         />
       </div>
 
-      <div className="mt-4 flex justify-between text-sm">
+      <div className="flex justify-between text-xs">
         <div>
           <span className="text-gray-500">Negative</span>
-          <span className="ml-2 font-medium">{feedback.negative}</span>
+          <span className="ml-1 font-medium">{feedback.negative}</span>
         </div>
         <div>
           <span className="text-gray-500">Neutral</span>
-          <span className="ml-2 font-medium">{feedback.neutral}</span>
+          <span className="ml-1 font-medium">{feedback.neutral}</span>
         </div>
         <div>
           <span className="text-gray-500">Positive</span>
-          <span className="ml-2 font-medium">{feedback.positive}</span>
+          <span className="ml-1 font-medium">{feedback.positive}</span>
         </div>
       </div>
     </div>
   )
 }
+

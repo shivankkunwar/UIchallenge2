@@ -9,11 +9,12 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 overflow-auto">
-        <main className="p-2">
+      <div className="flex-1 h-screen overflow-auto">
+        <main className="h-full px-2">
           {children}
         </main>
       </div>
     </div>
   )
 }
+

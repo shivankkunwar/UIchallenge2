@@ -41,9 +41,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="max-w-[1600px] mx-auto">
-      <div className="grid grid-cols-12 gap-2">
-        {/* Main content area - 8 columns */}
+    <div className="h-screen">
+      <div className="grid grid-cols-12 gap-2 h-full">
+
         <div className="bg-white rounded-lg col-span-8 space-y-6 p-6">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
@@ -73,11 +73,18 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Sidebar area - 4 columns */}
-        <div className="col-span-4 space-y-6">
-          <PerformanceGauge />
-          <CustomersByDevice />
-          <CommunityFeedback />
+        <div className="col-span-4 h-full overflow-hidden flex flex-col gap-4">
+          <div className="bg-white rounded-lg p-4 h-[300px]">
+            <PerformanceGauge />
+          </div>
+          <div className="flex-1 min-h-0 grid grid-rows-[70%_30%] gap-4">
+            <div className="bg-white rounded-lg p-4 overflow-hidden">
+              <CustomersByDevice />
+            </div>
+            <div className="bg-white rounded-lg p-4 overflow-hidden">
+              <CommunityFeedback />
+            </div>
+          </div>
         </div>
       </div>
     </div>

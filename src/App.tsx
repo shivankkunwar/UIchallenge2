@@ -1,11 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react'
-import Login from './pages/Login.tsx'
-import Dashboard from './pages/Dashboard.tsx'
-import Layout from './components/Layout.tsx'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import Layout from './components/Layout'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true)
+  }
 
   return (
     <Router>
@@ -13,17 +17,23 @@ function App() {
         <Route 
           path="/login" 
           element={
-            <Login onLoginSuccess={() => setIsAuthenticated(true)} />
+            isAuthenticated ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <Login onLoginSuccess={handleLoginSuccess} />
+            )
           } 
         />
         <Route
           path="/dashboard"
           element={
-          
+            isAuthenticated ? (
               <Layout>
                 <Dashboard />
               </Layout>
-            
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -33,3 +43,4 @@ function App() {
 }
 
 export default App
+

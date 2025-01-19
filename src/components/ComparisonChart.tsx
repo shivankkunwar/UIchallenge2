@@ -40,8 +40,15 @@ export default function ComparisonChart() {
     );
   };
 
-  if (loading) return <div>Loading chart...</div>
-
+  if (loading) {
+    return (
+      <div className="h-full flex flex-col animate-pulse" aria-busy="true">
+        <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+        <div className="flex-1 bg-gray-200 rounded"></div>
+        <div className="h-6 bg-gray-200 rounded w-1/2 mt-4 mx-auto"></div>
+      </div>
+    )
+  }
   return (
     <div className="bg-white p-6 rounded-lg">
     

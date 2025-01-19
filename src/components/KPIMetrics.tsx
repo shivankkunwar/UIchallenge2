@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { fetchMetrics } from '../services/api'
-
 import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/react/24/solid'
 import { KPIMetric } from '../types'
 
@@ -27,11 +26,12 @@ export default function KPIMetrics() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" aria-busy="true">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg p-4 shadow animate-pulse">
-            <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-            <div className="h-8 bg-gray-200 rounded"></div>
+          <div key={i} className="bg-white rounded-lg p-4 border border-gray-100 animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+            <div className="h-8 bg-gray-200 rounded mb-2"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/4"></div>
           </div>
         ))}
       </div>
@@ -47,6 +47,7 @@ export default function KPIMetrics() {
   }
 
   if (!metrics) return null
+
   const metricsData = [
     {
       label: 'Purchases',
@@ -76,24 +77,24 @@ export default function KPIMetrics() {
       {metricsData.map((metric, index) => (
         <div
           key={index}
-          className="bg-white rounded-lg p-4 border border-gray-100"
+          className="bg-white rounded-lg p-3 border border-gray-100"
         >
           <h3 className="text-sm text-gray-500 font-medium">
             {metric.label}
           </h3>
-          <div className="mt-2 flex items-center justify-between">
-            <p className="text-2xl font-semibold text-gray-900">
+          <div className="mt-1 flex items-center justify-between">
+            <p className="text-lg lg:text-xl font-semibold text-gray-900">
               {metric.value}
             </p>
             <div
-              className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-sm ${
+              className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs ${
                 metric.bgColor
               } ${metric.textColor}`}
             >
               {metric.change > 0 ? (
-                <ArrowUpIcon className="h-4 w-4" />
+                <ArrowUpIcon className="h-3 w-3" />
               ) : (
-                <ArrowDownIcon className="h-4 w-4" />
+                <ArrowDownIcon className="h-3 w-3" />
               )}
               {Math.abs(metric.change)}%
             </div>
@@ -103,3 +104,4 @@ export default function KPIMetrics() {
     </div>
   )
 }
+

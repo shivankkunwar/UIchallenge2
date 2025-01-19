@@ -42,97 +42,102 @@ export default function TopProducts() {
   }
 
   return (
-    <div className="bg-white rounded-lg">
-      <div className="px-6 py-4 flex justify-between items-center">
+    <div className="h-full flex flex-col">
+      <div className="flex justify-between items-center mb-2">
         <h3 className="text-base font-medium text-gray-900">Top Products</h3>
         <button className="text-sm text-gray-500 hover:text-gray-700">
           Full results
         </button>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Product
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Sold amount
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Unit price
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Revenue
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rating
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
+      <div className="flex-1 min-h-0 overflow-auto">
+        {/* Mobile View */}
+        <div className="block sm:hidden">
+          <div className="space-y-2">
             {products.map((product) => (
-              <tr key={product.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <img
-                      className="h-8 w-8 rounded-lg object-cover"
-                      src={product.image_url}
-                      alt={product.product_name}
-                    />
-                    <span className="ml-3 text-sm text-gray-900">
+              <div key={product.id} className="p-3 hover:bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <img
+                    className="h-10 w-10 rounded-lg object-cover"
+                    src={product.image_url || "/placeholder.svg"}
+                    alt={product.product_name}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate">
                       {product.product_name}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {product.sold_amount}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  ${product.unit_price}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  ${product.revenue.toLocaleString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <StarIcon className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                    <span className="ml-1">{product.rating}</span>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="block sm:hidden">
-        <div className="divide-y divide-gray-200">
-          {products.map((product) => (
-            <div key={product.id} className="px-6 py-4">
-              <div className="flex items-center space-x-3">
-                <img
-                  className="h-10 w-10 rounded-lg object-cover"
-                  src={product.image_url}
-                  alt={product.product_name}
-                />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">
-                    {product.product_name}
-                  </p>
-                  <div className="mt-1 flex items-center justify-between">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <StarIcon className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                      <span className="ml-1">{product.rating}</span>
+                    </p>
+                    <div className="mt-1 flex items-center justify-between">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <StarIcon className="h-4 w-4 text-yellow-400" />
+                        <span className="ml-1">{product.rating}</span>
+                      </div>
+                      <span className="text-sm text-gray-500">
+                        ${product.revenue.toLocaleString()}
+                      </span>
                     </div>
-                    <span className="text-sm text-gray-500">
-                      ${product.revenue.toLocaleString()}
-                    </span>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop View */}
+        <div className="hidden sm:block">
+          <table className="min-w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Product
+                </th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Sold
+                </th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Price
+                </th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Revenue
+                </th>
+                <th className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Rating
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {products.map((product) => (
+                <tr key={product.id} className="hover:bg-gray-50">
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <img
+                        className="h-8 w-8 rounded-lg object-cover"
+                        src={product.image_url || "/placeholder.svg"}
+                        alt={product.product_name}
+                      />
+                      <span className="ml-2 text-sm text-gray-900">
+                        {product.product_name}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {product.sold_amount}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    ${product.unit_price}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    ${product.revenue.toLocaleString()}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <StarIcon className="h-4 w-4 text-yellow-400" />
+                      <span className="ml-1">{product.rating}</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
