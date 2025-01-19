@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { MonthlyComparison, PerformanceScore } from '../types'
+import { PerformanceScore } from '../types'
 import { fetchPerformance } from '../services/api'
 
 export default function ComparisonChart() {

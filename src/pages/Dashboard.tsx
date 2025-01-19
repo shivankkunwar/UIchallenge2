@@ -15,7 +15,7 @@ import TopProducts from "../components/TopProducts";
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-
+  console.log(isLoading)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +28,7 @@ export default function Dashboard() {
         ]);
         setIsLoading(false);
       } catch (err) {
-        setError("Failed to fetch dashboard data");
+        setError("Failed to fetch dashboard data"+":"+err);
         setIsLoading(false);
       }
     };

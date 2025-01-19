@@ -34,7 +34,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         setError(response.data.message)
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setError('An error occurred. Please try again.'+":"+err)
     } finally {
       setIsLoading(false)
     }

@@ -7,6 +7,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts"
+
+import { TooltipProps } from "recharts"
 import { fetchCustomerData } from "../services/api"
 import { CustomerDevice } from "../types"
 
@@ -36,13 +38,14 @@ export default function CustomersByDevice() {
     )
   }
 
-  const CustomTooltip = ({ active, payload }: any) => {
+
+  const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-2 border border-gray-200 rounded-lg shadow-sm">
-          {payload.map((pld: any, index: number) => (
+          {payload.map((pld, index) => (
             <div key={index} className="text-xs text-gray-600">
-              {pld.name}: {pld.value.toLocaleString()}
+              {pld.name}: {pld.value?.toLocaleString()}
             </div>
           ))}
         </div>
