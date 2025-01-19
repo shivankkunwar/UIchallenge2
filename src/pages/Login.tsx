@@ -25,8 +25,16 @@ export default function Login({ onLoginSuccess }: LoginProps) {
     setError('')
 
     try {
-      const response = await axios.post('http://3.111.196.92:8020/api/v1/login/', formData)
-      
+      const response = await axios.post(
+        'http://3.111.196.92:8020/api/v1/login/',
+        formData,
+        {
+          headers: {
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json', 
+          },
+        }
+      );
       if (response.data.message === "Successfully Logged in") {
         onLoginSuccess()
         navigate('/dashboard')
